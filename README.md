@@ -41,14 +41,32 @@ limitations under the License.
 
 <!-- /.intro -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/blas-ext-base-dtriu2tril
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
 ```javascript
-import dtriu2tril from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-dtriu2tril@deno/mod.js';
+var dtriu2tril = require( '@stdlib/blas-ext-base-dtriu2tril' );
 ```
 
 #### dtriu2tril( order, M, N, k, A, LDA, B, LDB )
@@ -56,7 +74,7 @@ import dtriu2tril from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-dtri
 Reflects the upper triangular part of a double-precision floating-point matrix `A` into the lower triangular part of another matrix `B`.
 
 ```javascript
-import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
+var Float64Array = require( '@stdlib/array-float64' );
 
 var A = new Float64Array( [ 1.0, 2.0, 3.0, 4.0 ] );
 var B = new Float64Array( [ 0.0, 0.0, 0.0, 0.0 ] );
@@ -79,7 +97,7 @@ The function has the following parameters:
 Setting the `k` parameter to a value greater than `0` excludes the main diagonal (and, for larger values, additional super-diagonals). For example, to reflect only the elements strictly above the main diagonal,
 
 ```javascript
-import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
+var Float64Array = require( '@stdlib/array-float64' );
 
 var A = new Float64Array( [ 1.0, 2.0, 3.0, 4.0 ] );
 var B = new Float64Array( [ 0.0, 0.0, 0.0, 0.0 ] );
@@ -93,7 +111,7 @@ Note that indexing is relative to the first index. To introduce an offset, use [
 <!-- eslint-disable stdlib/capitalized-comments -->
 
 ```javascript
-import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
+var Float64Array = require( '@stdlib/array-float64' );
 
 // Initial arrays...
 var A0 = new Float64Array( [ 1.0, 2.0, 3.0, 4.0, 5.0 ] );
@@ -112,7 +130,7 @@ dtriu2tril( 'row-major', 2, 2, 0, A1, 2, B1, 2 );
 Reflects the upper triangular part of a double-precision floating-point matrix `A` into the lower triangular part of another matrix `B` using alternative indexing semantics.
 
 ```javascript
-import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
+var Float64Array = require( '@stdlib/array-float64' );
 
 var A = new Float64Array( [ 1.0, 2.0, 3.0, 4.0 ] );
 var B = new Float64Array( [ 0.0, 0.0, 0.0, 0.0 ] );
@@ -138,7 +156,7 @@ The function has the following parameters:
 While [`typed array`][mdn-typed-array] views mandate a view offset based on the underlying buffer, the offset parameters support indexing semantics based on starting indices. For example,
 
 ```javascript
-import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
+var Float64Array = require( '@stdlib/array-float64' );
 
 var A = new Float64Array( [ 1.0, 2.0, 3.0, 4.0 ] );
 var B = new Float64Array( [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ] );
@@ -170,11 +188,11 @@ dtriu2tril.ndarray( 2, 2, 0, A, 2, 1, 0, B, 2, 1, 2 );
 <!-- eslint-disable max-len -->
 
 ```javascript
-import ndarray2array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-to-array@deno/mod.js';
-import uniform from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-array-discrete-uniform@deno/mod.js';
-import numel from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-numel@deno/mod.js';
-import shape2strides from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-shape2strides@deno/mod.js';
-import dtriu2tril from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-dtriu2tril@deno/mod.js';
+var ndarray2array = require( '@stdlib/ndarray-base-to-array' );
+var uniform = require( '@stdlib/random-array-discrete-uniform' );
+var numel = require( '@stdlib/ndarray-base-numel' );
+var shape2strides = require( '@stdlib/ndarray-base-shape2strides' );
+var dtriu2tril = require( '@stdlib/blas-ext-base-dtriu2tril' );
 
 var shape = [ 5, 8 ];
 var order = 'row-major';
@@ -204,7 +222,150 @@ console.log( ndarray2array( B, shapeB, stridesB, 0, order ) );
 
 <!-- C interface documentation. -->
 
+* * *
 
+<section class="c">
+
+## C APIs
+
+<!-- Section to include introductory text. Make sure to keep an empty line after the intro `section` element and another before the `/section` close. -->
+
+<section class="intro">
+
+</section>
+
+<!-- /.intro -->
+
+<!-- C usage documentation. -->
+
+<section class="usage">
+
+### Usage
+
+```c
+#include "stdlib/blas/ext/base/dtriu2tril.h"
+```
+
+#### stdlib_strided_dtriu2tril( layout, M, N, k, \*A, LDA, \*B, LDB )
+
+Reflects the upper triangular part of a double-precision floating-point matrix `A` into the lower triangular part of another matrix `B`.
+
+```c
+#include "stdlib/blas/base/shared.h"
+
+const double A[] = { 1.0, 2.0, 3.0, 4.0 };
+double B[] = { 0.0, 0.0, 0.0, 0.0 };
+
+stdlib_strided_dtriu2tril( CblasRowMajor, 2, 2, 0, A, 2, B, 2 );
+```
+
+The function accepts the following arguments:
+
+-   **layout**: `[in] CBLAS_LAYOUT` storage layout.
+-   **M**: `[in] CBLAS_INT` number of rows in `A`.
+-   **N**: `[in] CBLAS_INT` number of columns in `A`.
+-   **k**: `[in] CBLAS_INT` diagonal below which to ignore.
+-   **A**: `[in] double*` input matrix.
+-   **LDA**: `[in] CBLAS_INT` stride of the first dimension of `A` (a.k.a., leading dimension of the matrix `A`).
+-   **B**: `[out] double*` output matrix.
+-   **LDB**: `[in] CBLAS_INT` stride of the first dimension of `B` (a.k.a., leading dimension of the matrix `B`).
+
+```c
+void API_SUFFIX(stdlib_strided_dtriu2tril)( const CBLAS_LAYOUT layout, const CBLAS_INT M, const CBLAS_INT N, const CBLAS_INT k, const double *A, const CBLAS_INT LDA, double *B, const CBLAS_INT LDB );
+```
+
+#### stdlib_strided_dtriu2tril_ndarray( M, N, k, \*A, sa1, sa2, oa, \*B, sb1, sb2, ob )
+
+Reflects the upper triangular part of a double-precision floating-point matrix `A` into the lower triangular part of another matrix `B` using alternative indexing semantics.
+
+```c
+const double A[] = { 1.0, 2.0, 3.0, 4.0 };
+double B[] = { 0.0, 0.0, 0.0, 0.0 };
+
+stdlib_strided_dtriu2tril_ndarray( 2, 2, 0, A, 2, 1, 0, B, 2, 1, 0 );
+```
+
+The function accepts the following arguments:
+
+-   **M**: `[in] CBLAS_INT` number of rows in `A`.
+-   **N**: `[in] CBLAS_INT` number of columns in `A`.
+-   **k**: `[in] CBLAS_INT` diagonal below which to ignore.
+-   **A**: `[in] double*` input matrix.
+-   **sa1**: `[in] CBLAS_INT` stride of the first dimension of `A`.
+-   **sa2**: `[in] CBLAS_INT` stride of the second dimension of `A`.
+-   **oa**: `[in] CBLAS_INT` starting index for `A`.
+-   **B**: `[out] double*` output matrix.
+-   **sb1**: `[in] CBLAS_INT` stride of the first dimension of `B`.
+-   **sb2**: `[in] CBLAS_INT` stride of the second dimension of `B`.
+-   **ob**: `[in] CBLAS_INT` starting index for `B`.
+
+```c
+void API_SUFFIX(stdlib_strided_dtriu2tril_ndarray)( const CBLAS_INT M, const CBLAS_INT N, const CBLAS_INT k, const double *A, const CBLAS_INT strideA1, const CBLAS_INT strideA2, const CBLAS_INT offsetA, double *B, const CBLAS_INT strideB1, const CBLAS_INT strideB2, const CBLAS_INT offsetB );
+```
+
+</section>
+
+<!-- /.usage -->
+
+<!-- C API usage notes. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
+
+<section class="notes">
+
+</section>
+
+<!-- /.notes -->
+
+<!-- C API usage examples. -->
+
+<section class="examples">
+
+### Examples
+
+```c
+#include "stdlib/blas/ext/base/dtriu2tril.h"
+#include "stdlib/blas/base/shared.h"
+#include <stdio.h>
+
+int main( void ) {
+    // Define a 3x3 input matrix stored in row-major order:
+    const double A[ 3*3 ] = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
+
+    // Define a 3x3 output matrix:
+    double B[ 3*3 ] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+
+    // Specify the number of elements along each dimension of `A`:
+    const CBLAS_INT M = 3;
+    const CBLAS_INT N = 3;
+
+    // Reflect the upper triangular part of `A` into the lower triangular part of `B`:
+    stdlib_strided_dtriu2tril( CblasRowMajor, M, N, 0, A, N, B, N );
+
+    // Print the result:
+    for ( int i = 0; i < M; i++ ) {
+        for ( int j = 0; j < N; j++ ) {
+            printf( "B[ %i,%i ] = %lf\n", i, j, B[ (i*N)+j ] );
+        }
+    }
+
+    // Reflect the upper triangular part of `A` (above the first super-diagonal) into `B` using alternative indexing semantics:
+    stdlib_strided_dtriu2tril_ndarray( M, N, 1, A, N, 1, 0, B, N, 1, 0 );
+
+    // Print the result:
+    for ( int i = 0; i < M; i++ ) {
+        for ( int j = 0; j < N; j++ ) {
+            printf( "B[ %i,%i ] = %lf\n", i, j, B[ (i*N)+j ] );
+        }
+    }
+}
+```
+
+</section>
+
+<!-- /.examples -->
+
+</section>
+
+<!-- /.c -->
 
 <section class="references">
 
@@ -225,7 +386,7 @@ console.log( ndarray2array( B, shapeB, stridesB, 0, order ) );
 
 ## Notice
 
-This package is part of [stdlib][stdlib], a standard library with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
+This package is part of [stdlib][stdlib], a standard library for JavaScript and Node.js, with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
 
 For more information on the project, filing bug reports and feature requests, and guidance on how to develop [stdlib][stdlib], see the main project [repository][stdlib].
 
